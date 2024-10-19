@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import { Login } from "../components/auth/login";
-import { Signup } from "../components/auth/signup";
+import { LoginComponent } from "../components/auth/log-in";
+import { SignupComponent } from "../components/auth/sign-up";
 
 import { ProtectedRoute } from "../components/protected-routes";
 import { NotFound } from "../components/not-found";
@@ -22,8 +22,8 @@ export const routes = createBrowserRouter([
     path: "/",
     children: [
       { index: true, element: <Navigate to="/login" /> },
-      { path: "login", element: <Login /> },
-      { path: "signup", element: <Signup /> },
+      { path: "login", element: <LoginComponent /> },
+      { path: "sign-up", element: <SignupComponent /> },
     ],
   },
   {
