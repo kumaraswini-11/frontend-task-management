@@ -12,9 +12,11 @@ import { baseUrl } from "@/lib/constants";
 import { toast } from "sonner";
 import { LoginSchema } from "@/schemas/sign-up-schema";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
+import { useUserStore } from "@/store/useStore";
 
 export const LoginComponent = () => {
   const navigate = useNavigate();
+  const { setUser } = useUserStore();
 
   const LoginForm = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -40,9 +42,9 @@ export const LoginComponent = () => {
 
       return await response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setUser(data?.data);
       toast.success("Login successfull.");
-      console.log("Login successfull.");
       navigate("/tasks");
     },
     onError: (error) => {
@@ -51,7 +53,6 @@ export const LoginComponent = () => {
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    console.log("test", values);
     mutate(values as any);
   };
 

@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { LoginComponent } from "../components/auth/log-in";
 import { SignupComponent } from "../components/auth/sign-up";
+import { Task } from "../components/task/task";
 
 import { ProtectedRoute } from "../components/protected-routes";
 import { NotFound } from "../components/not-found";
@@ -32,7 +33,7 @@ export const routes = createBrowserRouter([
       {
         path: "tasks",
         children: [
-          // { path: "", element: <Tasks /> },
+          { path: "", element: <Task /> },
           // { path: "create", element: <CreateTask /> },
           // { path: "edit/:taskId", element: <EditTask /> },
           // { path: "category/:categoryId", element: <TasksByCategory /> },
