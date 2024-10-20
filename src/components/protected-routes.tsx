@@ -6,7 +6,7 @@ export const ProtectedRoute: React.FC = () => {
   const location = useLocation();
   const { userId } = useUserStore();
 
-  if (!!userId) {
+  if (userId.length <= 0) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

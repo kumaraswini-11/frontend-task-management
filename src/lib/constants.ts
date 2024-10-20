@@ -1,1 +1,98 @@
 export const baseUrl = `${import.meta.env.VITE_BACKEND_BASE_URL}/api`;
+
+export const TaskStatus = {
+  PENDING: "pending",
+  IN_PROGRESS: "in-progress",
+  COMPLETED: "completed",
+} as const;
+
+export const tasks = [
+  {
+    id: "1",
+    title: "Complete project proposal",
+    status: TaskStatus.IN_PROGRESS,
+    dueDate: new Date(2024, 9, 21),
+    category: "Work",
+    createdOn: new Date(2024, 8, 12),
+  },
+  {
+    id: "2",
+    title: "Buy groceries",
+    status: TaskStatus.PENDING,
+    dueDate: new Date(2024, 9, 19),
+    category: "Personal",
+    createdOn: new Date(2024, 8, 10),
+  },
+  {
+    id: "3",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "4",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "5",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "6",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "7",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "8",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "9",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "10",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+  {
+    id: "11",
+    title: "Review team performance",
+    status: TaskStatus.COMPLETED,
+    dueDate: new Date(2024, 9, 18),
+    category: "Work",
+    createdOn: new Date(2024, 8, 15),
+  },
+];
