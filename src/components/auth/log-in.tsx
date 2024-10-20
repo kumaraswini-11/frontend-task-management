@@ -14,7 +14,7 @@ import { LoginSchema } from "@/schemas/sign-up-schema";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { useUserStore } from "@/store/useStore";
 
-export const LoginComponent = () => {
+export const LoginComponent: React.FC = () => {
   const navigate = useNavigate();
   const { setUser } = useUserStore();
 
@@ -37,7 +37,7 @@ export const LoginComponent = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to login");
+        throw new Error("Failed to login.");
       }
 
       return await response.json();
@@ -98,6 +98,15 @@ export const LoginComponent = () => {
                     </FormItem>
                   )}
                 ></FormField>
+                {/* TODO: Implimemt forgot password - with email magic link */}
+                {/* <div className="my-1">
+                  <Link
+                    to="/forgot-password"
+                    className="text-blue-700 hover:underline"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div> */}
                 <Button
                   disabled={status === "pending"}
                   size="lg"

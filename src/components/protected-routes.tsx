@@ -1,7 +1,8 @@
 import { useUserStore } from "@/store/useStore";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { ProtectedLayout } from "./protected-layout";
 
-export const ProtectedRoute = () => {
+export const ProtectedRoute: React.FC = () => {
   const location = useLocation();
   const { userId } = useUserStore();
 
@@ -9,5 +10,9 @@ export const ProtectedRoute = () => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  return <Outlet />;
+  return (
+    <ProtectedLayout>
+      <Outlet />
+    </ProtectedLayout>
+  );
 };
