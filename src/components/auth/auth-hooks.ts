@@ -5,7 +5,7 @@ import { z } from "zod";
 
 import { axiosInstance } from "@/lib/axios-config";
 import { LoginSchema } from "@/schemas/sign-up-schema";
-import { useUserStore } from "@/store/useStore";
+import { useUserStore } from "@/store/use-store";
 
 export const useSignupMutation = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export const useLoginMutation = () => {
       toast.success("Login successful.");
       navigate("/tasks");
     },
-    onError: (error: any, _, context) => {
+    onError: (error) => {
       console.error("Error logging in:", error);
       toast.error("Failed to login. Please try again.");
     },
@@ -81,7 +81,7 @@ export const useLogoutMutation = () => {
       });
       navigate("/login");
     },
-    onError: (error: any, _, context) => {
+    onError: (error) => {
       toast.error("Failed to log out. Please try again.");
       console.error(`Logout error: ${error?.message || "Unknown error."}`);
     },

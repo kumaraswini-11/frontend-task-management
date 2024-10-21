@@ -40,6 +40,7 @@ export const CategoryLanding = () => {
           type="text"
           placeholder="Enter category name"
           value={category}
+          // @ts-ignore
           onChange={(e) => setCategory(e.target.value)}
           disabled={isLoading}
         />

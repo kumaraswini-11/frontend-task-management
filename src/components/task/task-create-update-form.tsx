@@ -27,7 +27,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  // FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -41,7 +41,7 @@ import {
 
 export const TaskCreationAndUpdateForm: React.FC<
   CreationAndUpdateTaskFormProps
-> = ({ onCancel, onCreate, isEditMode = false, initialValues }) => {
+> = ({ onCreate, isEditMode = false, initialValues }) => {
   const { data: categories, isLoading: isCategoriesLoading } =
     useFetchCategoriesQuery();
   const isSubmitting = false;

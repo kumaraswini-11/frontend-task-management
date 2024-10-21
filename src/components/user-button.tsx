@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useUserStore } from "@/store/useStore";
+import { useUserStore } from "@/store/use-store";
 
 import { useLogoutMutation } from "./auth/auth-hooks";
 import { DottedSeparator } from "./dotted-separator";

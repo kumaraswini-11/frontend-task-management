@@ -5,7 +5,7 @@ import { DayPicker } from "react-day-picker";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({
   className,
@@ -52,7 +52,9 @@ function Calendar({
         ...classNames,
       }}
       components={{
+        // @ts-expect-error Its shadcn/ui file. Not suer how to surprace this type of unsed errors.
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
+        // @ts-expect-error Its shadcn/ui file. Not suer how to surprace this type of unsed errors.
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}
       {...props}

@@ -11,8 +11,10 @@ export const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const isSignUp = location.pathname == "/sign-up";
 
   useEffect(() => {
-    isAuthenticated() && navigate("/tasks");
-  }, []);
+    if (isAuthenticated()) {
+      navigate("/tasks");
+    }
+  }, [navigate]);
 
   return (
     <main className="min-h-screen bg-neutral-100">

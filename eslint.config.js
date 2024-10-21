@@ -5,6 +5,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import checkFile from "eslint-plugin-check-file";
+import unusedImports from "eslint-plugin-unused-imports";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -20,6 +21,7 @@ export default tseslint.config(
       "react-refresh": reactRefresh,
       "simple-import-sort": simpleImportSort,
       "check-file": checkFile,
+      "unused-imports": unusedImports,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -28,7 +30,6 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "@typescript-eslint/no-explicit-any": "off",
-
       "prefer-arrow-callback": ["error"],
       "prefer-template": ["error"],
       semi: ["error"],
@@ -36,6 +37,17 @@ export default tseslint.config(
       "react/no-unescaped-entities": "off",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+      "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+        },
+      ],
       "check-file/filename-naming-convention": [
         "error",
         {

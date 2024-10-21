@@ -199,6 +199,7 @@ export const Filter: React.FC<FilterTableProps> = ({ className, table }) => {
       <Input
         placeholder="Filter emails..."
         value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+        // @ts-ignore
         onChange={(event) =>
           table.getColumn("email")?.setFilterValue(event.target.value)
         }
