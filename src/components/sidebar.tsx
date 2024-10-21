@@ -6,6 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { cn } from "@/lib/utils";
 
+import TaskManagementLogo from "../assets/task-management-logo.svg";
 import { DottedSeparator } from "./dotted-separator";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
@@ -56,12 +57,7 @@ export const Sidebar: React.FC = () => {
   return (
     <aside className="h-full w-full bg-neutral-100 p-4">
       <Link to="/tasks" className="flex items-center gap-2">
-        <img
-          src="../src/assets/task-management-logo.svg"
-          alt="Logo"
-          width={60}
-          height={30}
-        />
+        <img src={TaskManagementLogo} alt="Logo" width={60} height={30} />
         <span className="hidden font-medium md:block">Task Manager</span>
       </Link>
       <DottedSeparator className="my-4" />

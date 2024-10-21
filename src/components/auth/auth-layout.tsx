@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { isAuthenticated } from "@/lib/utils";
 
+import TaskManagementLogo from "../../assets/task-management-logo.svg";
 import { Button } from "../ui/button";
 
 export const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
@@ -22,7 +23,7 @@ export const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img
-              src="../../src/assets/task-management-logo.svg"
+              src={TaskManagementLogo}
               alt="Task Management Logo"
               width={75}
               height={15}
