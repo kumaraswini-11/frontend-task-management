@@ -1,10 +1,16 @@
-import { ReactNode, FC } from "react";
+import { ReactNode, FC, useEffect } from "react";
 import { Button } from "../ui/button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { isAuthenticated } from "@/lib/utils";
 
 export const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
+  const navigate = useNavigate();
   let location = useLocation();
   const isSignUp = location.pathname == "/sign-up";
+
+  useEffect(() => {
+    isAuthenticated() && navigate("/tasks");
+  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-100">

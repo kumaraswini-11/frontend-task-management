@@ -3,20 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { AuthLayout } from "./auth-layout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
-import { baseUrl } from "@/lib/constants";
-import { toast } from "sonner";
 import { LoginSchema } from "@/schemas/sign-up-schema";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { useUserStore } from "@/store/useStore";
+import { useLoginMutation } from "./auth-hooks";
 
 export const LoginComponent: React.FC = () => {
-  const navigate = useNavigate();
-  const { setUser } = useUserStore();
+  const { mutate, status } = useLoginMutation();
 
   const LoginForm = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -26,34 +22,8 @@ export const LoginComponent: React.FC = () => {
     },
   });
 
-  const { mutate, status } = useMutation({
-    mutationFn: async (LoginData) => {
-      const response = await fetch(`${baseUrl}/users/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(LoginData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to login.");
-      }
-
-      return await response.json();
-    },
-    onSuccess: (data) => {
-      setUser(data?.data);
-      toast.success("Login successfull.");
-      navigate("/tasks");
-    },
-    onError: (error) => {
-      console.error("Error Loging in:", error);
-    },
-  });
-
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    mutate(values as any);
+    mutate(values);
   };
 
   return (
@@ -110,7 +80,7 @@ export const LoginComponent: React.FC = () => {
                 <Button
                   disabled={status === "pending"}
                   size="lg"
-                  className="w-full bg-blue-500 shadow-inner hover:bg-blue-700"
+                  className="w-full bg-amber-500 shadow-inner hover:bg-amber-700"
                 >
                   {status === "pending" ? "Loging..." : "Login"}
                 </Button>

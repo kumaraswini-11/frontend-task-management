@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,12 +21,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { signUpSchema } from "@/schemas/sign-up-schema";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { baseUrl } from "@/lib/constants";
+import { useSignupMutation } from "./auth-hooks";
 
 export const SignupComponent = () => {
-  const navigate = useNavigate();
+  const { mutate, status } = useSignupMutation();
 
   const signUpForm = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -37,34 +35,8 @@ export const SignupComponent = () => {
     },
   });
 
-  const { mutate, status } = useMutation({
-    mutationFn: async (signUpData) => {
-      const response = await fetch(`${baseUrl}/users/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(signUpData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to sign up");
-      }
-
-      return await response.json();
-    },
-    onSuccess: () => {
-      toast.success("Signup successful! Please log in.");
-      console.log("Signup successful!");
-      navigate("/login");
-    },
-    onError: (error) => {
-      console.error("Error signing up:", error);
-    },
-  });
-
   const onSubmit = (values: z.infer<typeof signUpSchema>) => {
-    mutate(values as any);
+    mutate(values);
   };
 
   return (
@@ -136,7 +108,7 @@ export const SignupComponent = () => {
                 <Button
                   disabled={status === "pending"}
                   size="lg"
-                  className="w-full bg-blue-500 shadow-inner hover:bg-blue-700"
+                  className="w-full bg-amber-500 shadow-inner hover:bg-amber-700"
                 >
                   {status === "pending" ? "Signing Up..." : "Sign Up"}
                 </Button>

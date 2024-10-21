@@ -3,20 +3,11 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { LoginComponent } from "../components/auth/log-in";
 import { SignupComponent } from "../components/auth/sign-up";
-import { Tasks } from "../components/task/tasks";
+import { TaskLanding } from "../components/task/tasks-landing";
+import { CategoryLanding } from "../components/category/category-landing";
 
 import { ProtectedRoute } from "../components/protected-routes";
 import { NotFound } from "../components/not-found";
-
-// const Tasks = lazy(() => import('../components/tasks/Tasks'));
-// const CreateTask = lazy(() => import('../components/tasks/CreateTask'));
-// const EditTask = lazy(() => import('../components/tasks/EditTask'));
-// const TasksByCategory = lazy(() => import('../components/tasks/TasksByCategory'));
-// const TasksByStatus = lazy(() => import('../components/tasks/TasksByStatus'));
-// const Categories = lazy(() => import('../components/categories/Categories'));
-// const CreateCategory = lazy(() => import('../components/categories/CreateCategory'));
-// const EditCategory = lazy(() => import('../components/categories/EditCategory'));
-// const NotFound = lazy(() => import('../components/NotFound'));
 
 export const routes = createBrowserRouter([
   {
@@ -33,7 +24,7 @@ export const routes = createBrowserRouter([
       {
         path: "tasks",
         children: [
-          { path: "", element: <Tasks /> },
+          { path: "", element: <TaskLanding /> },
           // { path: "create", element: <CreateTask /> },
           // { path: "edit/:taskId", element: <EditTask /> },
           // { path: "category/:categoryId", element: <TasksByCategory /> },
@@ -43,7 +34,7 @@ export const routes = createBrowserRouter([
       {
         path: "categories",
         children: [
-          // { path: "", element: <Categories /> },
+          { path: "", element: <CategoryLanding /> },
           // { path: "create", element: <CreateCategory /> },
           // { path: "edit/:categoryId", element: <EditCategory /> },
         ],

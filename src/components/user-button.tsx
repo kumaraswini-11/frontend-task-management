@@ -8,51 +8,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DottedSeparator } from "./dotted-separator";
 import { LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import { LiaPrayingHandsSolid } from "react-icons/lia";
-import { useMutation } from "@tanstack/react-query";
-import { baseUrl } from "@/lib/constants";
+import { useLogoutMutation } from "./auth/auth-hooks";
 
 export const UserButton: React.FC = () => {
-  const { username, email, resetUser } = useUserStore();
-  const navigate = useNavigate();
+  const { username, email } = useUserStore();
+  const logoutMutation = useLogoutMutation();
 
   const avatarFallback: string = username
     ? username.charAt(0).toUpperCase()
     : (email.charAt(0)?.toUpperCase() ?? "U"); // "U" - for User
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      const response = await fetch(`${baseUrl}/users/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      // "ok" property is a default behavior of the fetch API, and it is not something we need to explicitly send from the backend.
-      if (!response.ok) {
-        throw new Error("Failed to log out.");
-      }
-
-      return response.json();
-    },
-    onSuccess: () => {
-      resetUser();
-      toast.success("Logged out successfully.", {
-        description: <LiaPrayingHandsSolid />,
-      });
-      navigate("/login");
-      // window.location.reload();
-    },
-    onError: (error: any) => {
-      toast.error("Failed to log out. Please try again.");
-      console.log(
-        `Failed to log out. ${error?.message || "Please try again."}`
-      );
-    },
-  });
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   return (
     <DropdownMenu modal={false}>
@@ -84,7 +52,7 @@ export const UserButton: React.FC = () => {
         </div>
         <DottedSeparator className="mb-1" />
         <DropdownMenuItem
-          onClick={() => mutation.mutate()}
+          onClick={handleLogout}
           className="flex h-10 cursor-pointer items-center justify-center font-medium text-amber-500"
         >
           <LogOut className="mr-2 size-4" /> Log out

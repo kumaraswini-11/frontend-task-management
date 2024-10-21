@@ -14,6 +14,7 @@ import {
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -21,8 +22,9 @@ import {
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Grid3x3, SquareKanban } from "lucide-react";
 import { Input } from "./ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -65,11 +67,41 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  console.log("daat", data);
   return (
     <>
-      {/* <Filter table={table} /> */}
+      {/* {data.length > 0 && <Filter table={table} />} */}
 
       <div className="rounded-md border">
+        <TableCaption className="flex items-baseline justify-between px-4">
+          <div className="flex items-center justify-center gap-2">
+            <Grid3x3 size={16} />
+            Table View
+          </div>
+
+          <Tabs defaultValue="tableView" className="w-max-[200px]">
+            <TabsList>
+              <TabsTrigger value="tableView" title="Table View">
+                <Grid3x3 size={16} />
+              </TabsTrigger>
+              <TabsTrigger value="kanbanView" title="Kanban View">
+                <SquareKanban size={16} />
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="account">
+              <div className="flex items-center justify-center gap-2">
+                <Grid3x3 size={16} />
+                Table View
+              </div>
+            </TabsContent>
+            <TabsContent value="account">
+              <div className="flex items-center justify-center gap-2">
+                <Grid3x3 size={16} />
+                Table View
+              </div>
+            </TabsContent>
+          </Tabs>
+        </TableCaption>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -118,7 +150,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <Pagination table={table} />
+      {data.length > 0 && <Pagination table={table} />}
     </>
   );
 }
