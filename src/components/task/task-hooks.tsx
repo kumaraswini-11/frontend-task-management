@@ -8,7 +8,7 @@ export const useCreateTaskMutation = () => {
 
   return useMutation({
     mutationFn: async (newTaskData: Task) => {
-      const response = await axiosInstance.post("/tasks", newTaskData);
+      const response = await axiosInstance.post("/tasks?", newTaskData);
       return response.data;
     },
     onSuccess: () => {

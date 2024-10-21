@@ -67,7 +67,6 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  console.log("daat", data);
   return (
     <>
       {/* {data.length > 0 && <Filter table={table} />} */}

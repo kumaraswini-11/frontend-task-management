@@ -16,8 +16,6 @@ const TaskTable: React.FC = () => {
   const { data: tasks, isLoading, isError, error } = useFetchTasksQuery();
   const { mutate: createTask } = useCreateTaskMutation();
 
-  console.log("get tasks", tasks);
-
   const handleCreateTask = (newTask: any) => {
     createTask(newTask);
     setIsCreateFormVisible(false);
@@ -29,6 +27,14 @@ const TaskTable: React.FC = () => {
         <Skeleton className="mb-4 h-8 w-full" />
         <Skeleton className="h-18 mb-4 w-full" />
         <Skeleton className="h-18 mb-4 w-full" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="container mx-auto">
+        <p>Error: {error.message}</p>
       </div>
     );
   }
@@ -62,7 +68,7 @@ const TaskTable: React.FC = () => {
 
       {/* Display either the task creation form or the data table */}
       {!isCreateFormVisible ? (
-        <DataTable columns={taskColumns} data={tasks?.task ?? []} />
+        <DataTable columns={taskColumns} data={tasks?.tasks ?? []} />
       ) : (
         <TaskCreationAndUpdateForm
           onCancel={() => setIsCreateFormVisible(false)}

@@ -74,8 +74,8 @@ export const taskColumns: ColumnDef<TaskTable>[] = [
     cell: (info) => format(new Date(info.getValue() as Date), "dd MMM yyyy"),
   },
   {
-    accessorKey: "createdOn",
-    header: "Created On",
+    accessorKey: "createdAt",
+    header: "Created At",
     cell: (info) => format(new Date(info.getValue() as Date), "dd MMM yyyy"),
   },
   {
