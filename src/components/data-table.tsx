@@ -2,14 +2,16 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
 } from "@tanstack/react-table";
+import { ArrowUpDown, Grid3x3, SquareKanban } from "lucide-react";
+import { useState } from "react";
 
 import {
   Table,
@@ -20,9 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import { Button } from "./ui/button";
-import { useState } from "react";
-import { ArrowUpDown, Grid3x3, SquareKanban } from "lucide-react";
 import { Input } from "./ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 

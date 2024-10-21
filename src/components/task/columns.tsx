@@ -1,10 +1,11 @@
-import { TaskStatus } from "@/lib/constants";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
+
+import { TaskStatus } from "@/lib/constants";
+import { TaskStatusType, TaskTable } from "@/types/task-types";
+
 import { SortableColumnHeader } from "../data-table";
-import { Badge } from "../ui/badge";
-import { useDeleteTaskMutation, useUpdateTaskMutation } from "./task-hooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,7 +17,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { TaskStatusType, TaskTable } from "@/types/task-types";
+import { Badge } from "../ui/badge";
+import { useDeleteTaskMutation, useUpdateTaskMutation } from "./task-hooks";
 
 export const taskColumns: ColumnDef<TaskTable>[] = [
   {

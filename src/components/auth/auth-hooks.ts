@@ -1,10 +1,11 @@
-import { axiosInstance } from "@/lib/axios-config";
-import { LoginSchema } from "@/schemas/sign-up-schema";
-import { useUserStore } from "@/store/useStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
+
+import { axiosInstance } from "@/lib/axios-config";
+import { LoginSchema } from "@/schemas/sign-up-schema";
+import { useUserStore } from "@/store/useStore";
 
 export const useSignupMutation = () => {
   const navigate = useNavigate();

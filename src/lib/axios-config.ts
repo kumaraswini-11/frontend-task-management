@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { baseUrl } from "./constants";
 
 // Create an Axios instance with a predefined configuration

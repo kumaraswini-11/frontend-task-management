@@ -1,7 +1,8 @@
-import { axiosInstance } from "@/lib/axios-config";
-import { Task, TaskTable } from "@/types/task-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { axiosInstance } from "@/lib/axios-config";
+import { Task, TaskTable } from "@/types/task-types";
 
 export const useCreateTaskMutation = () => {
   const queryClient = useQueryClient();

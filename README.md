@@ -7,3 +7,4 @@ Build a task management app that allows users to create tasks, assign them to ca
 # Refernace
 
 - [](https://tanstack.com/router/latest/docs/framework/react/comparison)
+- [](https://github.com/jhipster/generator-jhipster/issues/5434)

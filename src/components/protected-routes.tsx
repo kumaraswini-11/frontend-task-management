@@ -1,6 +1,8 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { ProtectedLayout } from "./protected-layout";
+
 import { isAuthenticated } from "@/lib/utils";
+
+import { ProtectedLayout } from "./protected-layout";
 
 export const ProtectedRoute: React.FC = () => {
   const location = useLocation();

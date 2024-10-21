@@ -12,5 +12,9 @@
   },
   "exclude": [
     "src/routes/router.js"
-  ] 
+  ] ,
+  "noUnusedLocals": true,
+  "noImplicitAny": false,
+  "skipLibCheck": true,
+  "suppressImplicitAnyIndexErrors": true,
 }

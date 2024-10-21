@@ -1,5 +1,8 @@
-import { Button } from "../ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+
 import {
   Card,
   CardContent,
@@ -8,9 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "../ui/input";
+import { TaskStatus } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { TaskSchema } from "@/schemas/task-schema";
+import { CreationAndUpdateTaskFormProps, Task } from "@/types/task-types";
 
+import { useFetchCategoriesQuery } from "../category/category-hooks";
 import { DottedSeparator } from "../dotted-separator";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
 import {
   Form,
   FormControl,
@@ -20,9 +29,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { TaskStatus } from "@/lib/constants";
+import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Select,
   SelectContent,
@@ -30,13 +38,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { Calendar } from "../ui/calendar";
-import { TaskSchema } from "@/schemas/task-schema";
-import { CreationAndUpdateTaskFormProps, Task } from "@/types/task-types";
-import { useFetchCategoriesQuery } from "../category/category-hooks";
 
 export const TaskCreationAndUpdateForm: React.FC<
   CreationAndUpdateTaskFormProps

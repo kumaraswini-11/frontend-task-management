@@ -1,11 +1,13 @@
-import { ReactNode, FC, useEffect } from "react";
-import { Button } from "../ui/button";
+import { FC, ReactNode, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { isAuthenticated } from "@/lib/utils";
+
+import { Button } from "../ui/button";
 
 export const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
-  let location = useLocation();
+  const location = useLocation();
   const isSignUp = location.pathname == "/sign-up";
 
   useEffect(() => {

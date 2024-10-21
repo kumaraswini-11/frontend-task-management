@@ -1,6 +1,7 @@
-import { axiosInstance } from "@/lib/axios-config";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+
+import { axiosInstance } from "@/lib/axios-config";
 
 export const useCreateCategoryMutation = () => {
   const queryClient = useQueryClient();

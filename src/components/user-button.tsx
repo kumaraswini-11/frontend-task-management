@@ -1,14 +1,16 @@
-import { useUserStore } from "@/store/useStore";
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
+import { LogOut } from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DottedSeparator } from "./dotted-separator";
-import { LogOut } from "lucide-react";
+import { useUserStore } from "@/store/useStore";
+
 import { useLogoutMutation } from "./auth/auth-hooks";
+import { DottedSeparator } from "./dotted-separator";
 
 export const UserButton: React.FC = () => {
   const { username, email } = useUserStore();

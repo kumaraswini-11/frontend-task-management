@@ -27,6 +27,8 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "@typescript-eslint/no-explicit-any": "off",
+
       "prefer-arrow-callback": ["error"],
       "prefer-template": ["error"],
       semi: ["error"],

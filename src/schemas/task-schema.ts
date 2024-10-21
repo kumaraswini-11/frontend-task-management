@@ -1,5 +1,6 @@
-import { TaskStatus } from "@/lib/constants";
 import { z } from "zod";
+
+import { TaskStatus } from "@/lib/constants";
 
 export const TaskSchema = z.object({
   title: z.string().min(1, "Title is required"),

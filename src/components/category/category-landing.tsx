@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Card,
   CardContent,
@@ -6,11 +8,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useCreateCategoryMutation } from "./category-hooks";
-import { Input } from "../ui/input";
+
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { useCreateCategoryMutation } from "./category-hooks";
 
 export const CategoryLanding = () => {
   const [category, setCategory] = useState<string>("");

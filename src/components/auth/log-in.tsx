@@ -1,15 +1,17 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { z } from "zod";
+
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { AuthLayout } from "./auth-layout";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { LoginSchema } from "@/schemas/sign-up-schema";
+
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { useLoginMutation } from "./auth-hooks";
+import { AuthLayout } from "./auth-layout";
 
 export const LoginComponent: React.FC = () => {
   const { mutate, status } = useLoginMutation();
