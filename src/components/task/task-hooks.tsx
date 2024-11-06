@@ -41,7 +41,8 @@ export const useUpdateTaskMutation = () => {
   return useMutation({
     mutationFn: async ({ taskDetails }: { taskDetails: TaskTable }) => {
       const response = await axiosInstance.put(
-        `/tasks/${taskDetails.id}`,
+        // @ts-ignore
+        `/tasks/${taskDetails?.id}`,
         taskDetails
       );
       return response.data;

@@ -8,3 +8,4 @@ Build a task management app that allows users to create tasks, assign them to ca
 
 - [](https://tanstack.com/router/latest/docs/framework/react/comparison)
 - [](https://github.com/jhipster/generator-jhipster/issues/5434)
+- [](https://technotrampoline.com/articles/deploying-a-typescript-express-application-to-render/)

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { FaEdit, FaRegTrashAlt } from "react-icons/fa";
@@ -19,6 +20,8 @@ import {
 } from "../ui/alert-dialog";
 import { Badge } from "../ui/badge";
 import { useDeleteTaskMutation, useUpdateTaskMutation } from "./task-hooks";
+import { TaskCreationAndUpdateForm } from "./task-create-update-form";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 
 export const taskColumns: ColumnDef<TaskTable>[] = [
   {
@@ -85,25 +88,58 @@ export const taskColumns: ColumnDef<TaskTable>[] = [
     cell: ({ row }) => {
       const taskDetails = row.original;
 
-      const handleClick = (task: TaskTable, actionType: string) => {
-        console.log("task:", task, actionType);
+      const [isEditMode, setIsEditMode] = useState(false);
+      const [selectedTask, setSelectedTask] = useState<TaskTable | null>(null);
 
-        const { mutate: updateTask } = useUpdateTaskMutation();
-        const { mutate: deleteTask } = useDeleteTaskMutation();
+      const { mutate: updateTask } = useUpdateTaskMutation();
+      const { mutate: deleteTask } = useDeleteTaskMutation();
 
-        actionType.toLowerCase() === "edit"
-          ? updateTask({ taskDetails })
-          : deleteTask(taskDetails.id);
+      const handleEditClick = (task: TaskTable) => {
+        const formattedTask = {
+          ...task,
+          dueDate: task.dueDate ? new Date(task.dueDate) : new Date(),
+          status: task.status as TaskStatusType,
+        };
+
+        setSelectedTask(formattedTask);
+        setIsEditMode(true);
+      };
+
+      const handleDeleteClick = (taskId: string) => {
+        if (!taskId) {
+          console.error("Task ID is undefined, cannot delete task.");
+          return;
+        }
+
+        deleteTask(taskId);
       };
 
       return (
         <div className="flex items-center justify-center gap-5">
-          <FaEdit
-            className="cursor-pointer text-[18px] text-blue-500 transition-colors duration-150 hover:text-blue-600"
-            title="Edit"
-            onClick={() => handleClick(taskDetails, "edit")}
-          />
+          {/* Edit Form Modal */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <FaEdit
+                className="cursor-pointer text-[18px] text-blue-500 transition-colors duration-150 hover:text-blue-600"
+                title="Edit"
+                onClick={() => handleEditClick(taskDetails)}
+              />
+            </DialogTrigger>
+            <DialogContent>
+              {isEditMode && selectedTask && (
+                <TaskCreationAndUpdateForm
+                  isEditMode={true}
+                  initialValues={selectedTask}
+                  onUpdate={(updatedTask) => {
+                    updateTask({ taskDetails: updatedTask });
+                    setIsEditMode(false);
+                  }}
+                />
+              )}
+            </DialogContent>
+          </Dialog>
 
+          {/* Delete confirmation dialog */}
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <FaRegTrashAlt
@@ -124,7 +160,7 @@ export const taskColumns: ColumnDef<TaskTable>[] = [
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction
-                  onClick={() => handleClick(taskDetails, "delete")}
+                  onClick={() => handleDeleteClick(taskDetails?._id as string)}
                 >
                   Delete
                 </AlertDialogAction>

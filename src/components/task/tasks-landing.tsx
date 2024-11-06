@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { taskColumns } from "./columns";
 import { TaskCreationAndUpdateForm } from "./task-create-update-form";
-import { useCreateTaskMutation, useFetchTasksQuery } from "./task-hooks";
+import { useFetchTasksQuery } from "./task-hooks";
 
 export const TaskLanding: React.FC = () => {
   return <TaskTable />;
@@ -15,12 +15,6 @@ export const TaskLanding: React.FC = () => {
 const TaskTable: React.FC = () => {
   const [isCreateFormVisible, setIsCreateFormVisible] = useState(false);
   const { data: tasks, isLoading, isError, error } = useFetchTasksQuery();
-  const { mutate: createTask } = useCreateTaskMutation();
-
-  const handleCreateTask = (newTask: any) => {
-    createTask(newTask);
-    setIsCreateFormVisible(false);
-  };
 
   if (isLoading) {
     return (
@@ -62,7 +56,7 @@ const TaskTable: React.FC = () => {
             onClick={() => setIsCreateFormVisible(true)}
           >
             <ListPlus size={16} />
-            Edit Task
+            Create a Task
           </Button>
         )}
       </div>
@@ -73,7 +67,6 @@ const TaskTable: React.FC = () => {
       ) : (
         <TaskCreationAndUpdateForm
           onCancel={() => setIsCreateFormVisible(false)}
-          onCreate={handleCreateTask}
           isEditMode={false}
           initialValues={null}
         />

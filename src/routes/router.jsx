@@ -24,7 +24,10 @@ export const routes = createBrowserRouter([
       {
         path: "tasks",
         children: [
-          { path: "", element: <TaskLanding /> },
+          {
+            path: "",
+            element: <TaskLanding />,
+          },
           // { path: "create", element: <CreateTask /> },
           // { path: "edit/:taskId", element: <EditTask /> },
           // { path: "category/:categoryId", element: <TasksByCategory /> },
@@ -34,7 +37,10 @@ export const routes = createBrowserRouter([
       {
         path: "categories",
         children: [
-          { path: "", element: <CategoryLanding /> },
+          {
+            path: "",
+            element: <CategoryLanding />,
+          },
           // { path: "create", element: <CreateCategory /> },
           // { path: "edit/:categoryId", element: <EditCategory /> },
         ],

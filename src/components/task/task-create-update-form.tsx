@@ -7,14 +7,18 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
+  // CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { TaskStatus } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { TaskSchema } from "@/schemas/task-schema";
-import { CreationAndUpdateTaskFormProps, Task } from "@/types/task-types";
+import {
+  CreationAndUpdateTaskFormProps,
+  Task,
+  // TaskTable,
+} from "@/types/task-types";
 
 import { useFetchCategoriesQuery } from "../category/category-hooks";
 import { DottedSeparator } from "../dotted-separator";
@@ -38,15 +42,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Category } from "@/types/category-types";
+import { useCreateTaskMutation } from "./task-hooks";
 
 export const TaskCreationAndUpdateForm: React.FC<
   CreationAndUpdateTaskFormProps
-> = ({ onCreate, isEditMode = false, initialValues }) => {
-  const { data: categories, isLoading: isCategoriesLoading } =
-    useFetchCategoriesQuery();
-  const isSubmitting = false;
-  // console.log("test", categories);
-  // const isCategoriesLoading = false;
+> = ({ onUpdate, isEditMode = false, initialValues }) => {
+  const {
+    data: categories,
+    isLoading: isCategoriesLoading,
+    status,
+  } = useFetchCategoriesQuery();
+  const isSubmitting = status === "pending";
+  const { mutate: createTask } = useCreateTaskMutation();
 
   const createTaskForm = useForm<Task>({
     resolver: zodResolver(TaskSchema),
@@ -59,15 +67,21 @@ export const TaskCreationAndUpdateForm: React.FC<
     },
   });
 
-  console.log("1");
   const onSubmit = (values: Task) => {
-    console.log("2");
-    onCreate(values);
-    console.log("3");
+    if (isEditMode && onUpdate) {
+      console.log("Edit task: ", values);
+      onUpdate(values);
+    } else {
+      console.log("Create task: ", values);
+      createTask(values);
+      createTaskForm.reset();
+    }
   };
 
   return (
-    <div className="flex w-1/2 items-center justify-between rounded-md border border-neutral-300 p-4 shadow-sm">
+    <div
+      className={`${isEditMode ? "w-full" : "w-1/2"} flex items-center justify-between rounded-md border border-neutral-300 p-4 shadow-sm`}
+    >
       <Card className="w-full border-none shadow-none">
         <CardHeader className="flex flex-col items-center text-center">
           <CardTitle className="text-2xl">
@@ -127,7 +141,7 @@ export const TaskCreationAndUpdateForm: React.FC<
                         </SelectTrigger>
                         <SelectContent>
                           {categories?.categories?.map(
-                            (category: any, index: number) => (
+                            (category: Category, index: number) => (
                               <SelectItem key={index} value={category._id}>
                                 {category.name}
                               </SelectItem>
@@ -234,7 +248,7 @@ export const TaskCreationAndUpdateForm: React.FC<
               />
 
               {/* Buttons */}
-              <CardFooter className="flex w-full items-center justify-end gap-6 p-0">
+              <div className="flex w-full items-center justify-end gap-6 p-0">
                 <Button
                   variant="outline"
                   onClick={() => createTaskForm.reset()}
@@ -250,7 +264,7 @@ export const TaskCreationAndUpdateForm: React.FC<
                 >
                   {isSubmitting ? "Saving..." : "Save"}
                 </Button>
-              </CardFooter>
+              </div>
             </form>
           </Form>
         </CardContent>

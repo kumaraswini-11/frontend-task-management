@@ -74,10 +74,10 @@ export function DataTable<TData, TValue>({
 
       <div className="rounded-md border">
         <TableCaption className="flex items-baseline justify-between px-4">
-          <div className="flex items-center justify-center gap-2">
+          <span className="flex items-center justify-center gap-2">
             <Grid3x3 size={16} />
             Table View
-          </div>
+          </span>
 
           <Tabs defaultValue="tableView" className="w-max-[200px]">
             <TabsList>

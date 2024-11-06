@@ -1,6 +1,7 @@
 import { TaskStatus } from "@/lib/constants";
 
 export type Task = {
+  _id?: string;
   title: string;
   description?: string;
   status: TaskStatusType;
@@ -9,20 +10,21 @@ export type Task = {
 };
 
 export type TaskTable = {
-  id: string;
+  _id?: string;
   title: string;
   category: string;
   status: TaskStatusType;
   dueDate: Date;
-  createdOn: Date;
+  createdAt?: Date;
   description?: string;
 };
 
 export type TaskStatusType = (typeof TaskStatus)[keyof typeof TaskStatus];
 
 export type CreationAndUpdateTaskFormProps = {
-  onCancel: () => void;
-  onCreate: (newTask: Task) => void;
+  onCancel?: () => void;
+  onCreate?: (newTask: Task) => void;
+  onUpdate?: (newTask: TaskTable) => void;
   isEditMode: boolean;
   initialValues: Task | null;
 };
